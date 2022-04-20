@@ -68,8 +68,10 @@ static bool check_back_to_brom_dnl_flag(void)
  */
 int save_boot_params(void)
 {
-	int  ret = setjmp(brom_ctx);
 
+	save_boot_params_ret();
+	while(1);
+	int  ret = setjmp(brom_ctx);
 	switch (ret) {
 	case 0:
 		if (check_back_to_brom_dnl_flag())

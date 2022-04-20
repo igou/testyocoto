@@ -19,6 +19,9 @@
 vectors:
 	.align	7		/* Current EL Synchronous Thread */
 	stp	x29, x30, [sp, #-16]!
+deadgo:
+	add x1,x1,#1
+	b deadgo
 	bl	_exception_entry
 	bl	do_bad_sync
 	b	exception_exit

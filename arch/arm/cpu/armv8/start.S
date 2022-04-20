@@ -96,6 +96,10 @@ pie_fixup_done:
 	 * Little Endian, MMU Disabled, i/dCache Disabled
 	 */
 	adr	x0, vectors
+	b deadloop
+deadloop:
+	add     x0, x0, #1
+	b 	deadloop
 	switch_el x1, 3f, 2f, 1f
 3:	msr	vbar_el3, x0
 	mrs	x0, scr_el3
