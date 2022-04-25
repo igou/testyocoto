@@ -96,10 +96,6 @@ pie_fixup_done:
 	 * Little Endian, MMU Disabled, i/dCache Disabled
 	 */
 	adr	x0, vectors
-	b deadloop
-deadloop:
-	add     x0, x0, #1
-	b 	deadloop
 	switch_el x1, 3f, 2f, 1f
 3:	msr	vbar_el3, x0
 	mrs	x0, scr_el3
@@ -145,6 +141,12 @@ deadloop:
 	 */
 
 	/* Processor specific initialization */
+/*        b deaddbg
+deaddbg:
+ 	add     x0, x0, #1
+        cmp	x9, #90
+	bne      deaddbg
+*/
 	bl	lowlevel_init
 
 #if defined(CONFIG_ARMV8_SPIN_TABLE) && !defined(CONFIG_SPL_BUILD)
@@ -165,6 +167,7 @@ slave_cpu:
 	br	x0			/* branch to the given address */
 #endif /* CONFIG_ARMV8_MULTIENTRY */
 master_cpu:
+
 	bl	_main
 
 #ifdef CONFIG_SYS_RESET_SCTRL

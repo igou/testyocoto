@@ -103,6 +103,10 @@ ENTRY(_main)
 	bl	board_init_f_init_reserve
 	bl	board_init_f_boot_flags
 
+        b deadloop
+deadloop:
+        add     x0, x0, #1
+        b       deadloop
 	bl	board_init_f
 
 #if (defined(CONFIG_SPL_BUILD) && !defined(CONFIG_TPL_BUILD) && !defined(CONFIG_SPL_SKIP_RELOCATE)) || \
