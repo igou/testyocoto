@@ -381,7 +381,7 @@ int sdram_detect_row_3_4(struct sdram_cap_info *cap_info,
 	u32 row = cap_info->cs0_row;
 	void __iomem *test_addr, *test_addr1;
 
-	test_addr = CONFIG_SYS_SDRAM_BASE;
+	test_addr = (void *)CONFIG_SYS_SDRAM_BASE;
 	test_addr1 = (void __iomem *)(CONFIG_SYS_SDRAM_BASE +
 			(0x3ul << (row + bktmp + coltmp + bw - 1ul - 1ul)));
 
